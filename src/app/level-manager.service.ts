@@ -8,7 +8,7 @@ import { CommandProcessorService } from './command-processor.service';
 })
 export class LevelManagerService {
   //https://sokoban.info/?1_1
-  private arena = [
+  private arena: Array<TileType[]> = [
     [" "," "," "," ","W","W","W","W","W"," "," "," "," "," "," "," "," "," "," "],
     [" "," "," "," ","W",".",".",".","W"," "," "," "," "," "," "," "," "," "," "],
     [" "," "," "," ","W","B",".",".","W"," "," "," "," "," "," "," "," "," "," "],
@@ -21,12 +21,27 @@ export class LevelManagerService {
     [" "," "," "," ","W",".",".",".",".",".","W","W","W","W","W","W","W","W","W"],
     [" "," "," "," ","W","W","W","W","W","W","W"," "," "," "," "," "," "," "," "],
   ];
+  defaultArena: Array<TileType[]> = [
+    [" "," "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "," "]
+  ]; 
   level: Level|undefined;
 
   constructor() { }
 
-  loadLevel(commandProcessorService: CommandProcessorService): Level {
-    this.level = new Level(commandProcessorService, this.arena);
+  loadEmptyLevelForEditing(): Level {
+    this.level = new Level(this.defaultArena);
+    return this.level;
+  }
+
+  loadLevel(): Level {
+    this.level = new Level(this.arena);
     return this.level;
   }
 

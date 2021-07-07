@@ -9,13 +9,17 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { LevelEditorComponent } from './level-editor/level-editor.component';
 import { PlayingArenaComponent } from './playing-arena/playing-arena.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { EditorToolbarComponent } from './editor-toolbar/editor-toolbar.component';
+import { EditorArenaComponent } from './editor-arena/editor-arena.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     LevelEditorComponent,
-    PlayingArenaComponent
+    PlayingArenaComponent,
+    EditorToolbarComponent,
+    EditorArenaComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,0 +1,11 @@
+<div class="editor-arena">
+    <div *ngFor="let line of level.tiles; let i = index" style="display: flex;">
+        <div    *ngFor="let tile of line; let j = index" 
+                cdkDropList 
+                class="editor-arena-dropzone">
+        </div>
+        <div class="editor-arena-actions">X</div>
+    </div>
+    <div *ngFor="let line of level.tiles[0]; let i = index" class="editor-arena-actions">
+    Y</div>
+</div>

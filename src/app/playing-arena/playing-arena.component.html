@@ -1,18 +1,17 @@
 <div class="playarea">
-    <div *ngFor="let line of level.tiles; let i = index">
-        <span *ngFor="let tile of line; let j = index" 
+    <div *ngFor="let line of gameEngineService.level.tiles" class="d-flex">
+        <span *ngFor="let tile of line" 
                 [ngClass]="{
                     'sokoban-tile': true, 
                     'sokoban-tile-space'        : tile.type == ' ',
                     'sokoban-tile-wall'         : tile.type == 'W',
                     'sokoban-tile-floor'        : tile.type == '.',
                     'sokoban-tile-player'       : tile.type == 'P',
-                    'sokoban-tile-box'          : tile.type == 'B',
+                    'sokoban-tile-box'          : tile.type == 'B' && !tile.isExit,
                     'sokoban-tile-exit'         : tile.type == 'E',
-                    'sokoban-tile-finished-box' : tile.type == 'F'
+                    'sokoban-tile-finished-box' : tile.type == 'B' && tile.isExit
                 }"                                 
                 >
-            &nbsp;
         </span>
     </div>
 </div>

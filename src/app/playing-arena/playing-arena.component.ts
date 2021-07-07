@@ -1,11 +1,10 @@
-import { Component, OnInit, HostListener, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { CommandProcessorService } from '../command-processor.service';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { GameEngineService } from '../game-engine.service';
 import { Level, Facing } from '../level';
 import { LevelManagerService } from '../level-manager.service';
 
 @Component({
   selector: 'app-playing-arena',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './playing-arena.component.html',
   styleUrls: ['./playing-arena.component.scss']
 })
@@ -22,51 +21,47 @@ export class PlayingArenaComponent implements OnInit {
   }
 
   constructor(private levelManagerService: LevelManagerService, 
-              private commandProcessorService: CommandProcessorService,  
-              private changeDetectorRef: ChangeDetectorRef) { 
-
-  }
+              public gameEngineService: GameEngineService) { }
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (this.eventDirectionMap.hasOwnProperty(event.key)) {
-      this.level.moveInDirection(this.eventDirectionMap[event.key]);
+      this.gameEngineService.moveInDirection(this.eventDirectionMap[event.key]);
       this.refresh();
     }
   }
 
   ngOnInit() {
-    this.level = this.levelManagerService.loadLevel(this.commandProcessorService);
+    this.gameEngineService.setLevel(this.levelManagerService.loadLevel());
   }
 
   onBackward(): void {
-    while (this.commandProcessorService.canUndo()) {
-      this.commandProcessorService.undo();
+    while (this.gameEngineService.commandProcessorService.canUndo()) {
+      this.gameEngineService.commandProcessorService.undo();
     }
     this.refresh();
   }
 
   onForward(): void {
-    while (this.commandProcessorService.canRedo()) {
-      this.commandProcessorService.redo();
+    while (this.gameEngineService.commandProcessorService.canRedo()) {
+      this.gameEngineService.commandProcessorService.redo();
     }
     this.refresh();
   }
 
   onUndo(): void {
-    this.commandProcessorService.undo();
+    this.gameEngineService.commandProcessorService.undo();
     this.refresh();
   }
 
   onRedo(): void {
-    this.commandProcessorService.redo();
+    this.gameEngineService.commandProcessorService.redo();
     this.refresh();
   }
 
   refresh(): void {
-    this.stepCounter = this.level.getStepCount();
-    this.canUndo = this.commandProcessorService.canUndo();
-    this.canRedo = this.commandProcessorService.canRedo();
-    this.changeDetectorRef.detectChanges();
+    this.stepCounter = this.gameEngineService.getStepCount();
+    this.canUndo = this.gameEngineService.commandProcessorService.canUndo();
+    this.canRedo = this.gameEngineService.commandProcessorService.canRedo();
   }
 }

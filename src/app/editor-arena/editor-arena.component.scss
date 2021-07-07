@@ -1,0 +1,19 @@
+.editor-arena {
+    border: 1px solid black; 
+    width: 100%; 
+    height: 100%;
+
+    &-dropzone {
+        width: 38px; 
+        height: 38px; 
+        display: inline-block; 
+        border: 1px solid black;
+   }
+
+   &-actions {
+        width: 38px; 
+        height: 38px; 
+        display: inline-block; 
+        text-align: center;
+    }
+}

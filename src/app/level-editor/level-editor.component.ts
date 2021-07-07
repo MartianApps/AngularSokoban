@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CommandProcessorService } from '../command-processor.service';
+import { Level } from '../level';
+import { LevelManagerService } from '../level-manager.service';
 import { TileType } from '../tiles';
 
 @Component({
@@ -7,15 +10,12 @@ import { TileType } from '../tiles';
   styleUrls: ['./level-editor.component.scss']
 })
 export class LevelEditorComponent implements OnInit {
-  tileTypes: TileType[] = [
-    TileType.Box,
-    TileType.Exit,
-    TileType.Floor,
-    TileType.Player,
-    TileType.Wall];
-  constructor() { }
+  level: Level;
+    
+  constructor(private commandProcessorService: CommandProcessorService, private levelManagerService: LevelManagerService) { }
 
   ngOnInit() {
+    this.level = this.levelManagerService.loadEmptyLevelForEditing();
   }
 
 }

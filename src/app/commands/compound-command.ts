@@ -43,4 +43,10 @@ export class CompoundCommand extends BaseCommand {
         this.commandList.push(cmd);
         return this; // chainable!
     }
+
+    public appendIf(cmd: ICommand, condition: boolean) {
+        if (condition)
+            this.commandList.push(cmd);
+        return this; // chainable!
+    }
 }

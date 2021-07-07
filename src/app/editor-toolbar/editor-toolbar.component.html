@@ -1,0 +1,16 @@
+Tiles: 
+<div *ngFor="let tileType of draggableTileTypes" cdkDropList style="display: inline-block;width: 38px;">
+    <span   [ngClass]="{
+                'sokoban-tile': true, 
+                'sokoban-tile-space'        : tileType == ' ',
+                'sokoban-tile-wall'         : tileType == 'W',
+                'sokoban-tile-floor'        : tileType == '.',
+                'sokoban-tile-player'       : tileType == 'P',
+                'sokoban-tile-box'          : tileType == 'B',
+                'sokoban-tile-exit'         : tileType == 'E',
+                'sokoban-tile-finished-box' : tileType == 'F'
+            }"   
+            cdkDrag 
+            [cdkDragData]="tileType" 
+            style="cursor: move;">&nbsp;</span>
+</div>
