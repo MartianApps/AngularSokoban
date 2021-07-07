@@ -1,0 +1,19 @@
+.playarea {
+    float: left;
+    vertical-align: top;
+
+    &-controls {
+        float: left;
+        vertical-align: top;
+    
+        &-title {
+            padding-right: 10px;
+        }
+
+        &-numeric-info {
+            width: 30px;
+            text-align: center;
+        }
+    }
+}
+

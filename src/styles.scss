@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.sokoban-tile {
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+
+  &-space {
+      background-color: transparent;
+  }
+
+  &-wall {
+      background-image: url('./assets/i2.gif');
+  }
+
+  &-floor {
+      background-color: #2a2a2a;
+  }
+
+  &-player {
+      background-image: url('./assets/i5.gif');
+  }
+
+  &-box {
+      background-image: url('^assets/i3.gif');
+  }
+
+  &-exit {
+      background-image: url('^assets/i1.gif');
+  }
+
+  &-finished-box {
+      background-image: url('^assets/i4.gif');
+  }
+}

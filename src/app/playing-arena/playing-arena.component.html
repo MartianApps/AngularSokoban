@@ -1,0 +1,30 @@
+<div class="playarea">
+    <div *ngFor="let line of level.tiles; let i = index">
+        <span *ngFor="let tile of line; let j = index" 
+                [ngClass]="{
+                    'sokoban-tile': true, 
+                    'sokoban-tile-space'        : tile.type == ' ',
+                    'sokoban-tile-wall'         : tile.type == 'W',
+                    'sokoban-tile-floor'        : tile.type == '.',
+                    'sokoban-tile-player'       : tile.type == 'P',
+                    'sokoban-tile-box'          : tile.type == 'B',
+                    'sokoban-tile-exit'         : tile.type == 'E',
+                    'sokoban-tile-finished-box' : tile.type == 'F'
+                }"                                 
+                >
+            &nbsp;
+        </span>
+    </div>
+</div>
+<div class="playarea-controls">
+    <table>
+        <tr>
+            <td class="playarea-controls-title">Moves</td>
+            <td><span><button class="btn-sm btn-success" (click)="onBackward()" [disabled]="!canUndo"><i class="fas fa-backward"></i></button></span></td>
+            <td><span><button class="btn-sm btn-success" (click)="onUndo()" [disabled]="!canUndo"><i class="fas fa-undo"></i></button></span></td>
+            <td class="playarea-controls-numeric-info"><span>{{ stepCounter }}</span></td>
+            <td><span><button class="btn-sm btn-success" (click)="onRedo()" [disabled]="!canRedo"><i class="fas fa-redo"></i></button></span></td>
+            <td><span><button class="btn-sm btn-success" (click)="onForward()" [disabled]="!canRedo"><i class="fas fa-forward"></i></button></span></td>
+        </tr>
+    </table>
+</div>

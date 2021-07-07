@@ -1,0 +1,41 @@
+<div>
+
+</div>
+<div>
+    <!-- 
+        https://fluin.io/blog/things-I-wish-I-knew-about-CDK-drag-drop
+        https://stackblitz.com/edit/drag-drop-dashboard
+        https://timdeschryver.dev/blog/exploring-drag-and-drop-with-the-new-angular-material-cdk 
+    -->
+    <ng-container cdkDropListGroup>
+        <div style="float: left;">
+            Toolbox<br />
+            <div *ngFor="let tileType of tileTypes" cdkDropList>
+                <span   [ngClass]="{
+                            'sokoban-tile': true, 
+                            'sokoban-tile-space'        : tileType == ' ',
+                            'sokoban-tile-wall'         : tileType == 'W',
+                            'sokoban-tile-floor'        : tileType == '.',
+                            'sokoban-tile-player'       : tileType == 'P',
+                            'sokoban-tile-box'          : tileType == 'B',
+                            'sokoban-tile-exit'         : tileType == 'E',
+                            'sokoban-tile-finished-box' : tileType == 'F'
+                        }"   
+                        cdkDrag 
+                        [cdkDragData]="tileType" 
+                        style="cursor: move;">&nbsp;</span>
+            </div>
+        </div>
+        <div style="border: 1px solid black; width: 400px; float: left; height: 400px;;">
+            <div cdkDropList style="width: 38px; height: 38px; display: inline-block; border: 1px solid black;"></div>
+            <div cdkDropList style="width: 38px; height: 38px; display: inline-block; border: 1px solid black;"></div>
+            <div cdkDropList style="width: 38px; height: 38px; display: inline-block; border: 1px solid black;"></div>
+            <div cdkDropList style="width: 38px; height: 38px; display: inline-block; border: 1px solid black;"></div>
+            <br />
+            <div cdkDropList style="width: 38px; height: 38px; display: inline-block; border: 1px solid black;"></div>
+            <div cdkDropList style="width: 38px; height: 38px; display: inline-block; border: 1px solid black;"></div>
+            <div cdkDropList style="width: 38px; height: 38px; display: inline-block; border: 1px solid black;"></div>
+            <div cdkDropList style="width: 38px; height: 38px; display: inline-block; border: 1px solid black;"></div>
+        </div>
+    </ng-container>
+</div>
