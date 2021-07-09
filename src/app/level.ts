@@ -1,8 +1,5 @@
 import { ITile, TileType, Tile, TileType2 } from "./tiles";
 import { Point } from "./structures";
-import { CommandProcessorService } from "./command-processor.service";
-import { CompoundCommand } from "./commands/compound-command";
-import { ChangeTileTypeCommand } from "./commands/change-tile-type-command";
 
 export enum Facing {
   top = "top",

@@ -1,7 +1,15 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+//import { Store } from '@ngrx/store';
+import { Key } from 'ts-key-enum';
 import { GameEngineService } from '../game-engine.service';
 import { Level, Facing } from '../level';
 import { LevelManagerService } from '../level-manager.service';
+
+var eventDirectionMap = {};
+eventDirectionMap[Key.ArrowRight] = Facing.right;
+eventDirectionMap[Key.ArrowLeft] = Facing.left;
+eventDirectionMap[Key.ArrowUp] = Facing.top;
+eventDirectionMap[Key.ArrowDown] = Facing.bottom;
 
 @Component({
   selector: 'app-playing-arena',
@@ -12,28 +20,23 @@ export class PlayingArenaComponent implements OnInit {
   level: Level;  
   stepCounter: number = 0;
   canUndo: boolean = false;
-  canRedo: boolean = false;
-  eventDirectionMap = {
-    "ArrowRight" : Facing.right,
-    "ArrowLeft" : Facing.left,
-    "ArrowUp" : Facing.top,
-    "ArrowDown": Facing.bottom
-  }
+  canRedo: boolean = false;  
 
   constructor(private levelManagerService: LevelManagerService, 
-              public gameEngineService: GameEngineService) { }
-
-  @HostListener('window:keydown', ['$event'])
-  keyEvent(event: KeyboardEvent) {
-    if (this.eventDirectionMap.hasOwnProperty(event.key)) {
-      this.gameEngineService.moveInDirection(this.eventDirectionMap[event.key]);
-      this.refresh();
-    }
+              public gameEngineService: GameEngineService) {
   }
 
   ngOnInit() {
     this.gameEngineService.setLevel(this.levelManagerService.loadLevel());
   }
+
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (eventDirectionMap.hasOwnProperty(event.key)) {
+      this.gameEngineService.moveInDirection(eventDirectionMap[event.key]);
+      this.refresh();
+    }
+  }  
 
   onBackward(): void {
     while (this.gameEngineService.commandProcessorService.canUndo()) {
